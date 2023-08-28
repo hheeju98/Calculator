@@ -1,0 +1,38 @@
+td {
+  padding: 20px;
+  background-color: #b0e0e6;
+  border-radius: 10%;
+  margin: auto;
+  width: 35px;
+  height: 35px;
+  grid-row: 1/5;
+  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+td:hover {
+  background-color: #b0c4de;
+}
+
+table {
+  border-spacing: 18px; /* 수직 간격을 10px로 설정합니다. */
+}
+
+input {
+  width: 300px;
+  height: 30px;
+  border: none;
+  margin: auto;
+}
+tr {
+  justify-content: center;
+  display: grid;
+  grid-auto-rows: 20px; /* 추가적인 행의 높이를 설정 */
+  grid-auto-columns: 80px;
+}
+div {
+  border: 1px solid black;
+  width: 312px;
+  margin-left: 22px;
+}
