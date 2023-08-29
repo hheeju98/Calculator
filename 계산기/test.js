@@ -19,13 +19,13 @@ window.onload = () => {
   let currentOperator = "";
 
   // td 요소들 가져오기
-  const tdElements = document.querySelectorAll("td");
-  const tdElementsArray = Array.from(tdElements);
+  const divElements = document.querySelectorAll(".element");
+  const divElementsArray = Array.from(divElements);
 
   //forEach만되는이유
-  tdElementsArray.map((td) => {
+  divElementsArray.map((div) => {
     //에러이유
-    td.addEventListener("click", (e) => {
+    div.addEventListener("click", (e) => {
       // console.log(e);
       const clickedValue = e.target.innerText; // this가 가르키는것x
       //   console.log(clickedValue);
@@ -104,11 +104,11 @@ window.onload = () => {
 
 // if/switch 서로 다른점
 /*
-  const calculation = (accumulator,currrentValue, index, array) => {
-      const arr1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-      const initialValue = 0;
-      if (operator === "+") {
-        arr1.reduce((accumulator, currentValue) => num1 + num2, initialValue);
-      }
-    };
-*/
+    const calculation = (accumulator,currrentValue, index, array) => {
+        const arr1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        const initialValue = 0;
+        if (operator === "+") {
+          arr1.reduce((accumulator, currentValue) => num1 + num2, initialValue);
+        }
+      };
+  */

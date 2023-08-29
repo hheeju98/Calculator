@@ -1,0 +1,40 @@
+.element_box {
+  display: grid;
+  justify-content: center;
+  /* 
+  grid-auto-rows: 20px;추가적인 행의 높이를 설정 
+  grid-auto-columns: 80px;
+  */
+  grid-template-columns: 80px 80px 80px;
+  grid-template-rows: 40px 40px;
+  margin-left: 2px;
+}
+.element {
+  display: flex;
+  padding: 20px;
+  background-color: #b0e0e6;
+  border-radius: 10%;
+  width: 35px;
+  height: 35px;
+  grid-row: 1/5;
+  justify-content: center;
+  align-items: center;
+}
+.element:hover {
+  background-color: #b0c4de;
+}
+input {
+  width: 300px;
+  height: 30px;
+  border: none;
+  margin: auto;
+}
+
+.input_box {
+  border: 1px solid black;
+  width: 312px;
+  display: grid;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
