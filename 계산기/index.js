@@ -5,13 +5,13 @@ forEach-> Map으로 변경
 함수 모두 표현식으로 변경
 switch문 -> if문으로 통일
 html td grid/flex형태 수정
-계산 함수에 filter findIndex find 적용 reduce도 적용 - 못함
+계산 함수에 filter findIndex find 적용 다쓰기 reduce도 적용 - 못함
 태그 호출 방식 변경
 */
-
+// 표현식 왜 사용
 window.onload = () => {
-  const inputField = document.getElementById("inputField");
-  const outputField = document.getElementById("outputField");
+  const inputField = document.querySelector(".inputField");
+  const outputField = document.querySelector(".outputField");
   // 페이지 로드시에 다른방법 태그호출하는 법 다
   //모두 표현식으로 표현식
   let currentNumber = "";
@@ -20,14 +20,16 @@ window.onload = () => {
 
   // td 요소들 가져오기
   const tdElements = document.querySelectorAll("td");
+  console.log(tdElements); //유사배열
   const tdElementsArray = Array.from(tdElements);
 
   //forEach만되는이유
   tdElementsArray.map((td) => {
     //에러이유
     td.addEventListener("click", (e) => {
+      //함수로 빼기
       // console.log(e);
-      const clickedValue = e.target.innerText; // this가 가르키는것x
+      const clickedValue = e.target.innerText; // this가 가르키는것x innerText innerHTML왜안쓰는지
       //   console.log(clickedValue);
       // console.log(typeof e.target.innerText);
       //다른방법
@@ -55,7 +57,7 @@ window.onload = () => {
         currentNumber = "";
         currentNumber2 = "";
         currentOperator = "";
-        outputField.value = "";
+        outputField.value = ""; //함수형으로 가독성
         inputField.value = ""; //innertext/ value
       } else if (clickedValue === "=") {
         if (currentOperator !== "" && currentNumber2 !== "") {
@@ -74,34 +76,34 @@ window.onload = () => {
     });
     // 로드뒤에index.js호출 가능하도록
     // 함수 표현식 선언식
-    const formatNumber = (number) => {
-      return number.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
-
-    const isOperator = (value) => {
-      // filter findIndex find 케이스
-      const arr = ["+", "-", "×", "÷"];
-      if (arr.find((item) => item === value) !== undefined) {
-        return true;
-      } else {
-        return false;
-      }
-      //return ["+", "-", "×", "÷"].includes(value);
-    };
-    const calculation = (num1, operator, num2) => {
-      if (operator === "+") {
-        return num1 + num2;
-      } else if (operator === "-") {
-        return num1 - num2;
-      } else if (operator === "×") {
-        return num1 * num2;
-      } else if (operator === "÷") {
-        return num1 / num2;
-      }
-    };
   });
 };
 
+const formatNumber = (number) => {
+  return number.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+const isOperator = (value) => {
+  // filter findIndex find 케이스
+  const arr = ["+", "-", "×", "÷"];
+  if (arr.find((item) => item === value) !== undefined) {
+    return true;
+  } else {
+    return false;
+  }
+  //return ["+", "-", "×", "÷"].includes(value);
+};
+const calculation = (num1, operator, num2) => {
+  if (operator === "+") {
+    return num1 + num2;
+  } else if (operator === "-") {
+    return num1 - num2;
+  } else if (operator === "×") {
+    return num1 * num2;
+  } else if (operator === "÷") {
+    return num1 / num2;
+  }
+};
+// 함수를 밖으로 내놨는데 내부에서 호출해도 되는이유
 // if/switch 서로 다른점
 /*
   const calculation = (accumulator,currrentValue, index, array) => {
@@ -112,3 +114,4 @@ window.onload = () => {
       }
     };
 */
+//acc cur만 썼음
