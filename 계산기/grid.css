@@ -1,16 +1,17 @@
 .element_box {
   display: grid;
   justify-content: center;
-
   /*grid-auto-rows: 20px;추가적인 행의 높이를 설정  */
-  grid-auto-columns: 80px;
+  /* grid-auto-columns: 80px; */
   /* repeat */
   /* grid-template-columns: 80px; */
-  grid-template-rows: 40px 40px;
+  /* grid-template-rows: 40px 40px; */
+  grid-template-rows: repeat(5, 16px);
+  grid-template-columns: repeat(4, 80px);
   margin-left: 2px;
 }
 .element {
-  display: flex;
+  display: grid;
   padding: 20px;
   background-color: #b0e0e6;
   border-radius: 10%;
