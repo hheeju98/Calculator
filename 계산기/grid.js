@@ -45,8 +45,8 @@ window.onload = () => {
           currentOperator === "" ? currentNumber : currentNumber2
         );
         inputField.value = formattedNumber;
-      } else if (isOperator(clickedValue) === true) {
-        console.log(isOperator(clickedValue));
+      } else if (isOperator4(clickedValue) === true) {
+        console.log(isOperator4(clickedValue));
         currentOperator = clickedValue; // 연산자 설정
         outputField.value =
           currentNumber + " " + currentOperator + "" + currentNumber2;
@@ -88,6 +88,38 @@ window.onload = () => {
       }
       //return ["+", "-", "×", "÷"].includes(value);
     };
+    const isOperator2 = (value) => {
+      // filter findIndex find 케이스
+      const arr = ["+", "-", "×", "÷"];
+      if (arr.findIndex((item) => item === value) !== -1) {
+        return true;
+      } else {
+        return false;
+      }
+      //return ["+", "-", "×", "÷"].includes(value);
+    };
+
+    const isOperator3 = (value) => {
+      // filter findIndex find 케이스
+      const arr = ["+", "-", "×", "÷"];
+      if (arr.filter((item) => item == value).length !== 0) {
+        return true;
+      } else {
+        return false;
+      }
+      //return ["+", "-", "×", "÷"].includes(value);
+    };
+    const isOperator4 = (value) => {
+      // filter findIndex find 케이스
+      const arr = ["+", "-", "×", "÷"];
+      if (arr.filter((item) => item == value) == []) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+    //return ["+", "-", "×", "÷"].includes(value);
+    // }
     const calculation = (num1, operator, num2) => {
       if (operator === "+") {
         return num1 + num2;
