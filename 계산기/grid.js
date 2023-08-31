@@ -109,15 +109,15 @@ window.onload = () => {
       }
       //return ["+", "-", "×", "÷"].includes(value);
     };
-    const isOperator4 = (value) => {
-      // filter findIndex find 케이스
-      const arr = ["+", "-", "×", "÷"];
-      if (arr.filter((item) => item == value) == []) {
-        return false;
-      } else {
-        return true;
-      }
-    };
+    // const isOperator4 = (value) => {
+    //   // filter findIndex find 케이스
+    //   const arr = ["+", "-", "×", "÷"];
+    //   if (arr.filter((item) => item == value) == []) { 비교가 잘못 되어서 작동x
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    // };
     //return ["+", "-", "×", "÷"].includes(value);
     // }
     const calculation = (num1, operator, num2) => {
