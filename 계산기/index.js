@@ -19,34 +19,39 @@ window.onload = () => {
   });
 
   //console.log(tdElementsArray);
-  calculation = (clickedValue) => {
-    const outputField = document.querySelector(".outputField");
-    console.log(outputField.value);
-    try {
-      let display = document.querySelector(".outputField");
-      display.value = eval(display.value);
-      console.log(display.value);
-    } catch {
-      alert("올바른 계산식을 입력해 주세요");
-    }
-  };
 };
 
 const simple = (e) => {
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
   const clickedValue = e.target.innerText;
-  if (!isNaN(clickedValue)) {
+  if (isOperator(clickedValue) == true) {
+    currentOperator = clickedValue;
+    console.log(currentOperator);
+  } else if (!isNaN(clickedValue) && currentOperator === "") {
     one += clickedValue;
-    const formattedNumber = formatNumber(currentNumber);
-    outputField.value = formattedNumber;
-  } else if (isOperator2(clickedValue) === true) {
-    currentOperator = clickedValue; // 연산자 설정
-    outputField.value = currentNumber += clickedValue;
+    console.log(one);
+  } else if (!isNaN(clickedValue) && currentOperator !== "") {
+    two += clickedValue;
+    console.log(two);
+    result = calculation(one, currentOperator, two);
+    console.log(result);
+    result = one;
+
+    two = "";
+    result = one;
+
+    //  outputField.value = currentNumber += clickedValue;
+  } else if (result !== "" && currentOperator !== "") {
+    one = result;
+  } else if (clickedValue === "=") {
+    inputField.value = result;
   } else if (clickedValue === "c") {
     currentNumber = "";
     // currentNumber2 = "";
     currentOperator = "";
+    one = "";
+    two = "";
     outputField.value = ""; //함수형으로 가독성
     inputField.value = ""; //innertext/ value
   } else if (clickedValue === "=") {
@@ -79,14 +84,26 @@ const isOperator2 = (value) => {
   //return ["+", "-", "×", "÷"].includes(value); 사용
 };
 // reduce 써보기
-//const calculation = (num1, operator, num2) => {
-// if (operator === "+") {
-//   return num1 + num2;
-// } else if (operator === "-") {
-//   return num1 - num2;
-//} else if (operator === "×") {
-//  return num1 * num2;
-// } else if (operator === "÷") {
-//  return num1 / num2;
-// }
-//};
+const calculation = (num1, operator, num2) => {
+  if (operator === "+") {
+    return num1 + num2;
+  } else if (operator === "-") {
+    return num1 - num2;
+  } else if (operator === "×") {
+    return num1 * num2;
+  } else if (operator === "÷") {
+    return num1 / num2;
+  }
+};
+
+// calculation = (clickedValue) => {
+//   const outputField = document.querySelector(".outputField");
+//   console.log(outputField.value);
+//   try {
+//     let display = document.querySelector(".outputField");
+//     display.value = eval(display.value);
+//     console.log(display.value);
+//   } catch {
+//     alert("올바른 계산식을 입력해 주세요");
+//   }
+// };
