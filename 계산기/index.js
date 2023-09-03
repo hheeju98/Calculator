@@ -7,7 +7,6 @@ let operatorClicked = false;
 
 window.onload = () => {
   const tdElements = document.querySelectorAll("td");
-  //console.log(tdElements); 유사배열
   const tdElementsArray = Array.from(tdElements);
   tdElementsArray.map((td) => {
     td.addEventListener("click", simple);
@@ -17,17 +16,21 @@ window.onload = () => {
 const simple = (e) => {
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
-
   const clickedValue = e.target.innerText;
-  outputField.value += clickedValue;
-  if (isOperator(clickedValue) == true && operatorClicked == true) {
+
+  if (isOperator(clickedValue) && one !== "") {
+    console.log(outputField.value);
     currentOperator = clickedValue;
-    operatorClicked = false;
+    operatorClicked = true;
     console.log(operatorClicked);
     console.log(currentOperator);
+    outputField.value += clickedValue;
   } else if (!isNaN(clickedValue) && currentOperator === "") {
+    //operatorClicked = true;
     one += clickedValue;
+    operatorClicked = true;
     console.log(one);
+    outputField.value += clickedValue;
   } else if (!isNaN(clickedValue) && currentOperator !== "" && one !== "") {
     two += clickedValue;
     console.log(two);
@@ -36,16 +39,18 @@ const simple = (e) => {
     one = result;
     console.log(one);
     console.log(result);
+    outputField.value += clickedValue;
   } else if (clickedValue === "c") {
     currentOperator = "";
     one = "";
     two = "";
     outputField.value = "";
+    inputField.value = "";
+    operatorClicked = false;
   } else if (clickedValue === "=") {
     inputField.value = result;
-  } else if (!isNaN(clickedValue)) {
-    operatorClicked = true;
-    console.log(operatorClicked);
+    outputField.value = "";
+    operatorClicked = false;
   }
 };
 
@@ -55,6 +60,7 @@ const formatNumber = (number) => {
 const isOperator = (value) => {
   return ["+", "-", "×", "÷"].includes(value);
 };
+
 // reduce 써보기
 const calculation = (num1, operator, num2) => {
   if (operator === "+") {
