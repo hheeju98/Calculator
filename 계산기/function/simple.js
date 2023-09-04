@@ -1,20 +1,24 @@
 import { calculation } from "./calculation.js";
 import { isOperator } from "./isOperator.js";
-export let currentOperator = "";
-export let one = "";
-export let two = "";
-export let result = "";
-export let operatorClicked = true;
+let currentOperator = "";
+let one = "";
+let two = "";
+let result = "";
+let operatorClicked = true;
 
 export function simple(e) {
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
   const clickedValue = e.target.innerText;
 
-  if (isOperator(clickedValue) == true && one !== "" && operatorClicked) {
+  if (
+    isOperator(clickedValue) == true &&
+    one !== "" &&
+    operatorClicked == true
+  ) {
     currentOperator = clickedValue;
-    operatorClicked = false;
     outputField.value += clickedValue;
+    operatorClicked = false;
   } else if (!isNaN(clickedValue) && currentOperator === "") {
     one += clickedValue;
     outputField.value += clickedValue;

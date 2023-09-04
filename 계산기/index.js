@@ -1,4 +1,4 @@
-import { simple } from "./simple.js";
+import { simple } from "./function/simple.js";
 
 window.onload = () => {
   const tdElements = document.querySelectorAll("td");
