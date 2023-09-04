@@ -7,3 +7,6 @@ window.onload = () => {
     td.addEventListener("click", simple);
   });
 };
+
+// import require차이점 쓰는이유X
+// Import말고 다른 방법
