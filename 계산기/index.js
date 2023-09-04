@@ -18,22 +18,41 @@ const simple = (e) => {
   const outputField = document.querySelector(".outputField");
   const clickedValue = e.target.innerText;
 
+<<<<<<< HEAD
   if (isOperator(clickedValue) == true && one !== "" && operatorClicked) {
+=======
+  if (isOperator(clickedValue) && one !== "") {
+    console.log(outputField.value);
+>>>>>>> dcdfc0a7168d78d90e346b00354e4b0fa7057513
     currentOperator = clickedValue;
-    operatorClicked = false;
+    operatorClicked = true;
     console.log(operatorClicked);
+<<<<<<< HEAD
+=======
+    console.log(currentOperator);
+>>>>>>> dcdfc0a7168d78d90e346b00354e4b0fa7057513
     outputField.value += clickedValue;
   } else if (!isNaN(clickedValue) && currentOperator === "") {
+    //operatorClicked = true;
     one += clickedValue;
+    operatorClicked = true;
     console.log(one);
     outputField.value += clickedValue;
+<<<<<<< HEAD
     operatorClicked = true;
+=======
+>>>>>>> dcdfc0a7168d78d90e346b00354e4b0fa7057513
   } else if (!isNaN(clickedValue) && currentOperator !== "" && one !== "") {
     two += clickedValue;
     result = calculation(one, currentOperator, two);
     two = "";
     one = result;
+<<<<<<< HEAD
     operatorClicked = true;
+=======
+    console.log(one);
+    console.log(result);
+>>>>>>> dcdfc0a7168d78d90e346b00354e4b0fa7057513
     outputField.value += clickedValue;
   } else if (clickedValue === "c") {
     currentOperator = "";
@@ -41,11 +60,20 @@ const simple = (e) => {
     two = "";
     inputField.value = "";
     outputField.value = "";
+<<<<<<< HEAD
     operatorClicked = true;
   } else if (clickedValue === "=") {
     inputField.value = result;
     outputField.value = "";
     operatorClicked = true;
+=======
+    inputField.value = "";
+    operatorClicked = false;
+  } else if (clickedValue === "=") {
+    inputField.value = result;
+    outputField.value = "";
+    operatorClicked = false;
+>>>>>>> dcdfc0a7168d78d90e346b00354e4b0fa7057513
   }
 };
 
@@ -55,6 +83,7 @@ const formatNumber = (number) => {
 const isOperator = (value) => {
   return ["+", "-", "×", "÷"].includes(value);
 };
+
 // reduce 써보기
 const calculation = (num1, operator, num2) => {
   if (operator === "+") {
