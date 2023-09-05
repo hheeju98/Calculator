@@ -1,16 +1,23 @@
 import { calculation } from "./calculation.js";
 import { isOperator } from "./isOperator.js";
+
 let currentOperator = "";
 let one = "";
 let two = "";
 let result = "";
 let operatorClicked = true;
 
+const inputArray = []; // 함수 외부에 선언된 변수는 함수 호출간에 계속해서 유지되어 데이터가 누적된다.
 export function simple(e) {
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
   const clickedValue = e.target.innerText;
-
+  const inputData = {
+    value: clickedValue,
+    type: typeof clickedValue,
+  };
+  inputArray.push(inputData);
+  console.log(inputArray);
   if (
     isOperator(clickedValue) == true &&
     one !== "" &&
@@ -19,22 +26,23 @@ export function simple(e) {
     currentOperator = clickedValue;
     outputField.value += clickedValue;
     operatorClicked = false;
-  } else if (!isNaN(clickedValue) && currentOperator === "" && result == "") {
+  } else if (
+    !isNaN(clickedValue) &&
+    currentOperator === "" &&
+    inputField.value == ""
+  ) {
     one += clickedValue;
     outputField.value += clickedValue;
     operatorClicked = true;
   } else if (!isNaN(clickedValue) && currentOperator !== "" && one !== "") {
     two += clickedValue;
     result = calculation(one, currentOperator, two);
-    inputField.value = result;
-    outputField.value += clickedValue;
-    console.log(outputField.value);
-    currentOperator = "";
+
     two = "";
     one = result;
     operatorClicked = true;
-    outputField.value = "";
-    console.log(inputField.value);
+    outputField.value += clickedValue;
+
     if (inputField.value !== "" && isOperator(clickedValue)) {
       outputField.value += clickedValue;
     }
@@ -66,3 +74,5 @@ export function simple(e) {
 
 //import없을 경우 어디서 쓰는 변수인지 알기
 //계산기 형식 변경 진짜 계산기 처럼-> 제출
+// 데이터를 객체로 받기 value에서 연산자만 모아서 저장 연산자 우선순위 지정 배열 변경 이후 순수대로 계싼
+// 값으 누를 때 마다 객체에 값이 각각 들어와야 할듯

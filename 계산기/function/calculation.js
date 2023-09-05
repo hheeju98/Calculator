@@ -25,7 +25,3 @@ function calculation1(num1, operator, num2) {
     }
   });
 }
-// initial value
-// 문법 잘못됨 다시
-
-// simple말고 다 index로
