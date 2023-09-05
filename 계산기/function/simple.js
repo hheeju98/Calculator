@@ -19,17 +19,25 @@ export function simple(e) {
     currentOperator = clickedValue;
     outputField.value += clickedValue;
     operatorClicked = false;
-  } else if (!isNaN(clickedValue) && currentOperator === "") {
+  } else if (!isNaN(clickedValue) && currentOperator === "" && result == "") {
     one += clickedValue;
     outputField.value += clickedValue;
     operatorClicked = true;
   } else if (!isNaN(clickedValue) && currentOperator !== "" && one !== "") {
     two += clickedValue;
     result = calculation(one, currentOperator, two);
+    inputField.value = result;
+    outputField.value += clickedValue;
+    console.log(outputField.value);
+    currentOperator = "";
     two = "";
     one = result;
     operatorClicked = true;
-    outputField.value += clickedValue;
+    outputField.value = "";
+    console.log(inputField.value);
+    if (inputField.value !== "" && isOperator(clickedValue)) {
+      outputField.value += clickedValue;
+    }
   } else if (clickedValue === "c") {
     currentOperator = "";
     one = "";
