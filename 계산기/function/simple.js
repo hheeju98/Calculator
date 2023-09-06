@@ -1,23 +1,41 @@
 import { calculation } from "./calculation.js";
 import { isOperator } from "./isOperator.js";
 
-let currentOperator = "";
 let one = "";
+let operatorClicked = true;
 let two = "";
 let result = "";
-let operatorClicked = true;
+let currentOperator = "";
+const operatorArray = []; // 함수 외부에 선언된 변수는 함수 호출간에 계속해서 유지되어 데이터가 누적된다.
+const numberArray = [];
 
-const inputArray = []; // 함수 외부에 선언된 변수는 함수 호출간에 계속해서 유지되어 데이터가 누적된다.
 export function simple(e) {
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
   const clickedValue = e.target.innerText;
-  const inputData = {
+
+  const operatorData = {
     value: clickedValue,
     type: typeof clickedValue,
+    no: operatorArray.length,
   };
-  inputArray.push(inputData);
-  console.log(inputArray);
+
+  const numberData = {
+    value: clickedValue,
+    type: typeof clickedValue,
+    no: numberArray.length,
+  };
+
+  if (isOperator(clickedValue)) {
+    operatorArray.push(operatorData);
+  }
+  console.log(operatorArray);
+
+  if (!isNaN(clickedValue)) {
+    numberArray.push(numberData);
+  }
+  console.log(numberArray);
+
   if (
     isOperator(clickedValue) == true &&
     one !== "" &&
@@ -57,8 +75,20 @@ export function simple(e) {
     inputField.value = result;
     outputField.value = "";
     operatorClicked = true;
+    //inputArray.length = 0;
   }
 }
+
+function includePriority() {
+  if (inputArray.some(isPriority) == true) {
+    console.log(true);
+  }
+}
+
+function isPriority(value) {
+  return ["×", "÷"].includes(value);
+}
+
 // = 누를시 배열에 객체를 담아서 연산자 찾고 우선순위 (조건문) 그것의 앞의 숫자 계산[{타입, value, no}]
 // 조검문(우선 순위 재지정)->return박거나 오브젝트 다시 sort 배열에 map배열에 객체 넣는법 계싼식 -> 연산자를 함수("+")[더하기,나누기,곱하기,빼기] 배열에서 => if("더하기"){
 // value.value + value.value
@@ -76,3 +106,6 @@ export function simple(e) {
 //계산기 형식 변경 진짜 계산기 처럼-> 제출
 // 데이터를 객체로 받기 value에서 연산자만 모아서 저장 연산자 우선순위 지정 배열 변경 이후 순수대로 계싼
 // 값으 누를 때 마다 객체에 값이 각각 들어와야 할듯
+//split함수 써서 계산해야 할듯?
+// ()를 사용해서 우선 순위 명시적으로 지정
+// (같은 no의 숫자 연산자 no no+1의 숫자 제일 앞으로 보내기)
