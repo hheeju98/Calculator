@@ -8,11 +8,19 @@ let result = "";
 let currentOperator = "";
 const operatorArray = []; // 함수 외부에 선언된 변수는 함수 호출간에 계속해서 유지되어 데이터가 누적된다.
 const numberArray = [];
-
+const totalArray = [];
 export function simple(e) {
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
   const clickedValue = e.target.innerText;
+
+  const totalData = {
+    value: clickedValue,
+    type: typeof clickedValue,
+    no: totalArray.length,
+  };
+  totalArray.push(totalData);
+  console.log(totalArray);
 
   const operatorData = {
     value: clickedValue,
@@ -79,15 +87,15 @@ export function simple(e) {
   }
 }
 
-function includePriority() {
-  if (inputArray.some(isPriority) == true) {
-    console.log(true);
-  }
-}
+// function includePriority() {
+//   if (inputArray.some(isPriority) == true) {
+//     console.log(true);
+//   }
+// }
 
-function isPriority(value) {
-  return ["×", "÷"].includes(value);
-}
+// function isPriority(value) {
+//   return ["×", "÷"].includes(value);
+// }
 
 // = 누를시 배열에 객체를 담아서 연산자 찾고 우선순위 (조건문) 그것의 앞의 숫자 계산[{타입, value, no}]
 // 조검문(우선 순위 재지정)->return박거나 오브젝트 다시 sort 배열에 map배열에 객체 넣는법 계싼식 -> 연산자를 함수("+")[더하기,나누기,곱하기,빼기] 배열에서 => if("더하기"){
@@ -109,3 +117,5 @@ function isPriority(value) {
 //split함수 써서 계산해야 할듯?
 // ()를 사용해서 우선 순위 명시적으로 지정
 // (같은 no의 숫자 연산자 no no+1의 숫자 제일 앞으로 보내기)
+
+// index of 더하기 나누기의 index받아와서 그 값을 배열의 2번째로 같은 no의 숫자를 제일 처음 인덱스로no+1 을 두번째 인덱스로
