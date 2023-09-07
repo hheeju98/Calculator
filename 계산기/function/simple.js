@@ -124,8 +124,7 @@ export function simple(e) {
           result
         );
         console.log(totalArray);
-        totalArray.map((item) => item.value);
-        console.log(totalArray);
+
         // totalArray.length = 0;
         // operatorArray.length = 0;
         // numberArray.lengtrh = 0;
@@ -140,6 +139,13 @@ export function simple(e) {
         });
 
         console.log(finalArray);
+        const finalResult = calculation(
+          finalArray[0],
+          finalArray[1],
+          finalArray[2]
+        );
+        console.log(finalResult);
+        inputField.value = finalResult;
       }
     }
   }
