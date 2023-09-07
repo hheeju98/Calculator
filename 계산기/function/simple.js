@@ -85,7 +85,7 @@ export function simple(e) {
     inputField.value = result;
     outputField.value = "";
     operatorClicked = true;
-    //inputArray.length = 0;
+
     if (includePriority(operatorArray) !== -1) {
       const operatorIndex = includePriority(operatorArray);
       console.log(operatorIndex);
@@ -112,6 +112,22 @@ export function simple(e) {
           nextNumber
         );
         console.log(result);
+        // totalArray[
+        //   (numberArray[operatorIndex].no,
+        //   numberArray[operatorIndex].no - 1,
+        //   numberArray[operatorIndex].no + 1)
+        // ] = result;
+        console.log(includePriority(totalArray));
+        totalArray.splice(
+          includePriority(totalArray) - 1,
+          includePriority(totalArray) + 2,
+          result
+        );
+        console.log(totalArray);
+        // totalArray.length = 0;
+        // operatorArray.length = 0;
+        // numberArray.lengtrh = 0;
+        // calculateArray.length = 0;
       }
     }
   }
