@@ -9,6 +9,8 @@ let currentOperator = "";
 const operatorArray = []; // 함수 외부에 선언된 변수는 함수 호출간에 계속해서 유지되어 데이터가 누적된다.
 const numberArray = [];
 const totalArray = [];
+const calculateArray = [];
+
 export function simple(e) {
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
@@ -84,17 +86,63 @@ export function simple(e) {
     outputField.value = "";
     operatorClicked = true;
     //inputArray.length = 0;
+    if (includePriority(operatorArray) !== -1) {
+      const operatorIndex = includePriority(operatorArray);
+      console.log(operatorIndex);
+      if (operatorIndex >= 0) {
+        const prevNumberIndex = numberArray[operatorIndex].no;
+        console.log(prevNumberIndex);
+        const nextNumberIndex = numberArray[operatorIndex].no + 1;
+        console.log(nextNumberIndex);
+        const prevNumber = numberArray[prevNumberIndex].value;
+        console.log(prevNumber);
+        console.log(operatorIndex);
+        console.log(operatorArray[operatorIndex].value);
+        const nextNumber = numberArray[nextNumberIndex].value;
+        console.log(nextNumber);
+        calculateArray.push(
+          prevNumber,
+          operatorArray[operatorIndex].value,
+          nextNumber
+        );
+        console.log(calculateArray);
+        const result = calculation(
+          prevNumber,
+          operatorArray[operatorIndex].value,
+          nextNumber
+        );
+        console.log(result);
+      }
+    }
   }
 }
+function includePriority(arr) {
+  const index = arr.findIndex(
+    (item) => item.value === "×" || item.value === "÷"
+  );
+  console.log(index);
+  return index;
+}
+// function includePriority(arr) {
+//   for (const item of arr) {
+//     const index = arr.findIndex(
+//       (item) => item.value === "×" || item.value === "÷"
+//     );
+//     return index;
+//   }
+// }
+// function includePriority(arr) {
+//   for (const item of arr) {
+//     if (item.value === "×" || item.value === "÷") {
+//       return item.index; // 배열에 곱하기 또는 나누기 연산이 포함되어 있으면 true를 반환합니다.
+//     }
+//   }
+// }
 
 // function includePriority() {
 //   if (inputArray.some(isPriority) == true) {
 //     console.log(true);
 //   }
-// }
-
-// function isPriority(value) {
-//   return ["×", "÷"].includes(value);
 // }
 
 // = 누를시 배열에 객체를 담아서 연산자 찾고 우선순위 (조건문) 그것의 앞의 숫자 계산[{타입, value, no}]
@@ -112,6 +160,7 @@ export function simple(e) {
 
 //import없을 경우 어디서 쓰는 변수인지 알기
 //계산기 형식 변경 진짜 계산기 처럼-> 제출
+
 // 데이터를 객체로 받기 value에서 연산자만 모아서 저장 연산자 우선순위 지정 배열 변경 이후 순수대로 계싼
 // 값으 누를 때 마다 객체에 값이 각각 들어와야 할듯
 //split함수 써서 계산해야 할듯?
@@ -119,3 +168,5 @@ export function simple(e) {
 // (같은 no의 숫자 연산자 no no+1의 숫자 제일 앞으로 보내기)
 
 // index of 더하기 나누기의 index받아와서 그 값을 배열의 2번째로 같은 no의 숫자를 제일 처음 인덱스로no+1 을 두번째 인덱스로
+
+// calculateArray의 값을 계산해서 결과 값을 totalArray의 해당 식 대신에(곱하기나 나누기의 양옆값) 넣어주고 나머지 계산
