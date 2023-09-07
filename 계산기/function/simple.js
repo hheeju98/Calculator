@@ -124,10 +124,22 @@ export function simple(e) {
           result
         );
         console.log(totalArray);
+        totalArray.map((item) => item.value);
+        console.log(totalArray);
         // totalArray.length = 0;
         // operatorArray.length = 0;
         // numberArray.lengtrh = 0;
         // calculateArray.length = 0;
+
+        const finalArray = totalArray.map((item) => {
+          if (typeof item === "object") {
+            return item.value;
+          } else if (typeof item === "number") {
+            return String(item);
+          }
+        });
+
+        console.log(finalArray);
       }
     }
   }
@@ -186,3 +198,14 @@ function includePriority(arr) {
 // index of 더하기 나누기의 index받아와서 그 값을 배열의 2번째로 같은 no의 숫자를 제일 처음 인덱스로no+1 을 두번째 인덱스로
 
 // calculateArray의 값을 계산해서 결과 값을 totalArray의 해당 식 대신에(곱하기나 나누기의 양옆값) 넣어주고 나머지 계산
+
+// const finalArray = totalArray.map((item) => {
+//   if (typeof item === "object") {
+//     return item.value;
+//     if (!isNaN(item.value)) {
+//       return parseInt(value);
+//     }
+//   } else if (typeof item === "number") {
+//     return item;
+//   }
+// });
