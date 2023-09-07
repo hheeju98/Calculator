@@ -10,18 +10,22 @@ export function calculation(num1, operator, num2) {
   }
 }
 
-function calculation1(num1, operator, num2) {
-  const arr = [num1, num2];
-  arr.reduce((acc, cur) => {
-    //여기서 부터 틀림
+export function calculation1(num1, operator, num2) {
+  let arr = [num1, num2];
+  let initialValue;
+  return arr.reduce((acc, cur) => {
     if (operator === "+") {
-      return acc + cur;
+      initialValue = 0;
+      return Number(acc) + Number(cur);
     } else if (operator === "-") {
-      return acc - cur;
+      initialValue = num1;
+      return Number(acc) - Number(cur);
     } else if (operator === "×") {
-      return acc * cur;
+      initialValue = 1;
+      return Number(acc) * Number(cur);
     } else if (operator === "÷") {
-      return acc / cur;
+      initialValue = num1;
+      return Number(acc) / Number(cur);
     }
   });
 }

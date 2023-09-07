@@ -1,4 +1,4 @@
-import { calculation } from "./calculation.js";
+import { calculation1 } from "./calculation.js";
 import { isOperator } from "./isOperator.js";
 
 let one = "";
@@ -61,7 +61,7 @@ export function simple(e) {
     operatorClicked = true;
   } else if (!isNaN(clickedValue) && currentOperator !== "" && one !== "") {
     two += clickedValue;
-    result = calculation(one, currentOperator, two);
+    result = calculation1(one, currentOperator, two);
 
     two = "";
     one = result;
@@ -97,7 +97,7 @@ export function simple(e) {
           nextNumber
         );
 
-        const result = calculation(
+        const result = calculation1(
           prevNumber,
           operatorArray[operatorIndex].value,
           nextNumber
@@ -118,7 +118,7 @@ export function simple(e) {
         });
 
         console.log(finalArray);
-        const finalResult = calculation(
+        const finalResult = calculation1(
           finalArray[0],
           finalArray[1],
           finalArray[2]
