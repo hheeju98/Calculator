@@ -8,5 +8,38 @@ window.onload = () => {
   });
 };
 
-// import require차이점 쓰는이유X
-// Import말고 다른 방법
+const formatNumber = (number) => {
+  return number.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+export function calculation(num1, operator, num2) {
+  if (operator === "+") {
+    return parseInt(num1) + parseInt(num2);
+  } else if (operator === "-") {
+    return num1 - num2;
+  } else if (operator === "×") {
+    return num1 * num2;
+  } else if (operator === "÷") {
+    return num1 / num2;
+  }
+}
+
+export function calculation1(num1, operator, num2) {
+  let arr = [num1, num2];
+
+  return arr.reduce((acc, cur) => {
+    if (operator === "+") {
+      return Number(acc) + Number(cur);
+    } else if (operator === "-") {
+      return acc - cur;
+    } else if (operator === "×") {
+      return acc * cur;
+    } else if (operator === "÷") {
+      return acc / cur;
+    }
+  });
+}
+
+export function isOperator(value) {
+  return ["+", "-", "×", "÷"].includes(value);
+}

@@ -1,11 +1,12 @@
-import { calculation1 } from "./calculation.js";
-import { isOperator } from "./isOperator.js";
+import { isOperator } from "../index.js";
+import { calculation } from "../index.js";
 
 let one = "";
 let operatorClicked = true;
 let two = "";
 let result = "";
 let currentOperator = "";
+
 const operatorArray = []; // 함수 외부에 선언된 변수는 함수 호출간에 계속해서 유지되어 데이터가 누적된다. 내부에 선언된 경우 호출 시마다 계속 초기화됨
 const numberArray = [];
 const totalArray = [];
@@ -21,8 +22,11 @@ export function simple(e) {
     type: typeof clickedValue,
     no: totalArray.length,
   };
-  totalArray.push(totalData);
 
+  if (clickedValue !== "del") {
+    totalArray.push(totalData);
+  }
+  console.log(totalArray);
   const operatorData = {
     value: clickedValue,
     type: typeof clickedValue,
@@ -61,7 +65,7 @@ export function simple(e) {
     operatorClicked = true;
   } else if (!isNaN(clickedValue) && currentOperator !== "" && one !== "") {
     two += clickedValue;
-    result = calculation1(one, currentOperator, two);
+    result = calculation(one, currentOperator, two);
 
     two = "";
     one = result;
@@ -83,7 +87,7 @@ export function simple(e) {
     outputField.value = "";
     operatorClicked = true;
 
-    if (includePriority(operatorArray) !== -1) {
+    if (includePriority(operatorArray) !== -1 && numberArray.length > 2) {
       const operatorIndex = includePriority(operatorArray);
       console.log(operatorIndex);
       if (operatorIndex >= 0) {
@@ -97,7 +101,7 @@ export function simple(e) {
           nextNumber
         );
 
-        const result = calculation1(
+        const result = calculation(
           prevNumber,
           operatorArray[operatorIndex].value,
           nextNumber
@@ -118,7 +122,7 @@ export function simple(e) {
         });
 
         console.log(finalArray);
-        const finalResult = calculation1(
+        const finalResult = calculation(
           finalArray[0],
           finalArray[1],
           finalArray[2]
@@ -138,6 +142,28 @@ function includePriority(arr) {
   const index = arr.findIndex(
     (item) => item.value === "×" || item.value === "÷"
   );
-
   return index;
 }
+document.addEventListener("keydown", (event) => {
+  console.log(event);
+});
+
+function Remove() {
+  const deleteArray = totalArray.map((item) => {
+    if (typeof item === "object") {
+      return item.value;
+    } else if (typeof item === "number") {
+      return String(item);
+    }
+  });
+
+  totalArray.pop();
+  deleteArray.pop();
+  outputField.value = deleteArray;
+  const delResult = deleteArray.join("");
+  outputField.value = delResult;
+  console.log(deleteArray);
+}
+
+const del = document.getElementById("del");
+del.addEventListener("click", Remove);
