@@ -26,7 +26,7 @@ export function simple(e) {
   if (clickedValue !== "del") {
     totalArray.push(totalData);
   }
-  console.log(totalArray);
+
   const operatorData = {
     value: clickedValue,
     type: typeof clickedValue,
@@ -82,14 +82,16 @@ export function simple(e) {
     inputField.value = "";
     outputField.value = "";
     operatorClicked = true;
-  } else if (clickedValue === "=") {
+  } else if (
+    clickedValue === "=" &&
+    !isNaN(totalArray[totalArray.length - 2].value)
+  ) {
     inputField.value = result;
     outputField.value = "";
     operatorClicked = true;
 
     if (includePriority(operatorArray) !== -1 && numberArray.length > 2) {
       const operatorIndex = includePriority(operatorArray);
-      console.log(operatorIndex);
       if (operatorIndex >= 0) {
         const prevNumberIndex = numberArray[operatorIndex].no;
         const nextNumberIndex = numberArray[operatorIndex].no + 1;
@@ -121,7 +123,6 @@ export function simple(e) {
           }
         });
 
-        console.log(finalArray);
         const finalResult = calculation(
           finalArray[0],
           finalArray[1],
@@ -138,17 +139,14 @@ export function simple(e) {
     }
   }
 }
-function includePriority(arr) {
+export function includePriority(arr) {
   const index = arr.findIndex(
     (item) => item.value === "×" || item.value === "÷"
   );
   return index;
 }
-document.addEventListener("keydown", (event) => {
-  console.log(event);
-});
 
-function Remove() {
+export function Remove() {
   const deleteArray = totalArray.map((item) => {
     if (typeof item === "object") {
       return item.value;
