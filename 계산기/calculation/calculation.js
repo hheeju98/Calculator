@@ -24,7 +24,6 @@ export function calculation1(num1, operator, num2) {
     } else if (operator === "-") {
       return acc - cur;
     } else if (operator === "×") {
-      console.log("gg");
       return acc * cur;
     } else if (operator === "÷") {
       return acc / cur;

@@ -7,9 +7,9 @@ let two = "";
 let result = "";
 let currentOperator = "";
 // 분산
-const operatorArray = []; // 함수 외부에 선언된 변수는 함수 호출간에 계속해서 유지되어 데이터가 누적된다. 내부에 선언된 경우 호출 시마다 계속 초기화됨
-const numberArray = [];
+
 const totalArray = [];
+const numberArray = [];
 const calculateArray = [];
 
 export function simple(e) {
@@ -28,26 +28,15 @@ export function simple(e) {
   if (clickedValue !== "del") {
     totalArray.push(totalData);
   }
-
-  const operatorData = {
-    value: clickedValue,
-    type: typeof clickedValue,
-    no: operatorArray.length,
-  };
-
-  const numberData = {
-    value: clickedValue,
-    type: typeof clickedValue,
-    no: numberArray.length,
-  }; // 객체를 하나로
-
-  if (isOperator(clickedValue)) {
-    operatorArray.push(operatorData);
-  }
+  console.log(totalArray);
 
   if (!isNaN(clickedValue)) {
-    numberArray.push(numberData);
+    numberArray.push(totalData);
   }
+
+  console.log(numberArray);
+
+  // 객체를 하나로
 
   if (
     isOperator(clickedValue) == true &&
@@ -84,8 +73,7 @@ export function simple(e) {
     outputField.value = "";
     operatorClicked = true;
     totalArray.length = 0;
-    operatorArray.length = 0;
-    numberArray.length = 0;
+
     calculateArray.length = 0;
   } else if (
     clickedValue === "=" &&
@@ -95,22 +83,24 @@ export function simple(e) {
     outputField.value = "";
     operatorClicked = true;
 
-    if (includePriority(operatorArray) !== -1 && numberArray.length > 2) {
-      const operatorIndex = includePriority(operatorArray);
+    if (includePriority(totalArray) !== -1 && numberArray.length > 2) {
+      const operatorIndex = includePriority(totalArray);
       if (operatorIndex >= 0) {
-        const prevNumberIndex = numberArray[operatorIndex].no;
-        const nextNumberIndex = numberArray[operatorIndex].no + 1;
-        const prevNumber = numberArray[prevNumberIndex].value;
-        const nextNumber = numberArray[nextNumberIndex].value;
+        console.log(operatorIndex);
+        const prevNumberIndex = totalArray[operatorIndex].no - 1;
+
+        const nextNumberIndex = totalArray[operatorIndex].no + 1;
+        const prevNumber = totalArray[prevNumberIndex].value;
+        const nextNumber = totalArray[nextNumberIndex].value;
         calculateArray.push(
           prevNumber,
-          operatorArray[operatorIndex].value,
+          totalArray[operatorIndex].value,
           nextNumber
         );
 
         const result = calculation1(
           prevNumber,
-          operatorArray[operatorIndex].value,
+          totalArray[operatorIndex].value,
           nextNumber
         );
 
@@ -135,10 +125,9 @@ export function simple(e) {
         );
 
         inputField.value = finalResult;
-        totalArray.length = 0;
-        operatorArray.length = 0;
-        numberArray.length = 0;
-        calculateArray.length = 0;
+        // totalArray.length = 0;
+        // numberArray.length = 0;
+        // calculateArray.length = 0;
       }
     }
   }
