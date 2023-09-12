@@ -66,7 +66,6 @@ export function simple(e) {
   } else if (!isNaN(clickedValue) && currentOperator !== "" && one !== "") {
     two += clickedValue;
     result = calculation(one, currentOperator, two);
-
     two = "";
     one = result;
     operatorClicked = true;
@@ -82,6 +81,10 @@ export function simple(e) {
     inputField.value = "";
     outputField.value = "";
     operatorClicked = true;
+    totalArray.length = 0;
+    operatorArray.length = 0;
+    numberArray.length = 0;
+    calculateArray.length = 0;
   } else if (
     clickedValue === "=" &&
     !isNaN(totalArray[totalArray.length - 2].value)
@@ -160,8 +163,27 @@ export function Remove() {
   outputField.value = deleteArray;
   const delResult = deleteArray.join("");
   outputField.value = delResult;
-  console.log(deleteArray);
 }
 
 const del = document.getElementById("del");
 del.addEventListener("click", Remove);
+
+const outputField = document.getElementById("outputField");
+document.addEventListener("keydown", function (event) {
+  const key = event.key;
+  console.log(event.key);
+  if (!isNaN(key) || isOperator(key)) {
+    outputField.value += key;
+  }
+  if (key === "=") {
+    // simple(key);
+  }
+});
+
+// document.addEventListener("keydown", (event) => {
+//   const typedValue = event.key;
+//   console.log(typedValue);
+//   outputField.value += typedValue;
+//   result = eval(outputField);
+//   inputField.value = result;
+// });
