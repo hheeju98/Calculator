@@ -160,6 +160,11 @@ export function Remove() {
   outputField.value = delResult;
 }
 
+//reduce
+export function Remove() {
+  const deleteArray = totalArray.reduce(() => {});
+}
+
 const del = document.getElementById("del");
 del.addEventListener("click", Remove);
 
