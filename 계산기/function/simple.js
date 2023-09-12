@@ -1,26 +1,28 @@
-import { isOperator } from "../index.js";
-import { calculation } from "../index.js";
+import { isOperator } from "../calculation/calculation.js";
+import { calculation1 } from "../calculation/calculation.js";
 
 let one = "";
 let operatorClicked = true;
 let two = "";
 let result = "";
 let currentOperator = "";
-
+// 분산
 const operatorArray = []; // 함수 외부에 선언된 변수는 함수 호출간에 계속해서 유지되어 데이터가 누적된다. 내부에 선언된 경우 호출 시마다 계속 초기화됨
 const numberArray = [];
 const totalArray = [];
 const calculateArray = [];
 
 export function simple(e) {
+  console.log("string", e);
+  const clickedValue = e.target.innerText;
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
-  const clickedValue = e.target.innerText;
 
   const totalData = {
     value: clickedValue,
     type: typeof clickedValue,
     no: totalArray.length,
+    //no+1
   };
 
   if (clickedValue !== "del") {
@@ -37,7 +39,7 @@ export function simple(e) {
     value: clickedValue,
     type: typeof clickedValue,
     no: numberArray.length,
-  };
+  }; // 객체를 하나로
 
   if (isOperator(clickedValue)) {
     operatorArray.push(operatorData);
@@ -65,7 +67,7 @@ export function simple(e) {
     operatorClicked = true;
   } else if (!isNaN(clickedValue) && currentOperator !== "" && one !== "") {
     two += clickedValue;
-    result = calculation(one, currentOperator, two);
+    result = calculation1(one, currentOperator, two);
     two = "";
     one = result;
     operatorClicked = true;
@@ -106,7 +108,7 @@ export function simple(e) {
           nextNumber
         );
 
-        const result = calculation(
+        const result = calculation1(
           prevNumber,
           operatorArray[operatorIndex].value,
           nextNumber
@@ -126,32 +128,36 @@ export function simple(e) {
           }
         });
 
-        const finalResult = calculation(
+        const finalResult = calculation1(
           finalArray[0],
           finalArray[1],
           finalArray[2]
         );
 
         inputField.value = finalResult;
-
-        // totalArray.length = 0;
-        // operatorArray.length = 0;
-        // numberArray.length = 0;
-        // calculateArray.length = 0;
+        totalArray.length = 0;
+        operatorArray.length = 0;
+        numberArray.length = 0;
+        calculateArray.length = 0;
       }
     }
   }
 }
+
 export function includePriority(arr) {
   const index = arr.findIndex(
     (item) => item.value === "×" || item.value === "÷"
   );
   return index;
 }
+//()->오브젯트 {}return!
 
 export function Remove() {
   const deleteArray = totalArray.map((item) => {
+    //reduce로 바꾸기
+    console.log(item);
     if (typeof item === "object") {
+      // 타입 제대로 나오게 객체
       return item.value;
     } else if (typeof item === "number") {
       return String(item);
@@ -161,21 +167,25 @@ export function Remove() {
   totalArray.pop();
   deleteArray.pop();
   outputField.value = deleteArray;
+  console.log(deleteArray);
   const delResult = deleteArray.join("");
+  console.log(delResult);
   outputField.value = delResult;
 }
 
 const del = document.getElementById("del");
 del.addEventListener("click", Remove);
 
+//모듈
 const outputField = document.getElementById("outputField");
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", (event) => {
   const key = event.key;
   console.log(event.key);
   if (!isNaN(key) || isOperator(key)) {
     outputField.value += key;
   }
   if (key === "=") {
+    simple(event);
     // simple(key);
   }
 });
