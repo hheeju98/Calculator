@@ -18,9 +18,16 @@ export function simple(e) {
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
 
+  let type;
+
+  if (!isNaN(clickedValue)) {
+    type = "number";
+  } else {
+    type = "string";
+  }
   const totalData = {
     value: clickedValue,
-    type: typeof clickedValue,
+    type: type,
     no: totalArray.length,
     //no+1
   };
@@ -28,15 +35,10 @@ export function simple(e) {
   if (clickedValue !== "del") {
     totalArray.push(totalData);
   }
-  console.log(totalArray);
 
   if (!isNaN(clickedValue)) {
     numberArray.push(totalData);
   }
-
-  console.log(numberArray);
-
-  // 객체를 하나로
 
   if (
     isOperator(clickedValue) == true &&
@@ -86,9 +88,7 @@ export function simple(e) {
     if (includePriority(totalArray) !== -1 && numberArray.length > 2) {
       const operatorIndex = includePriority(totalArray);
       if (operatorIndex >= 0) {
-        console.log(operatorIndex);
         const prevNumberIndex = totalArray[operatorIndex].no - 1;
-
         const nextNumberIndex = totalArray[operatorIndex].no + 1;
         const prevNumber = totalArray[prevNumberIndex].value;
         const nextNumber = totalArray[nextNumberIndex].value;
@@ -156,9 +156,7 @@ export function Remove() {
   totalArray.pop();
   deleteArray.pop();
   outputField.value = deleteArray;
-  console.log(deleteArray);
   const delResult = deleteArray.join("");
-  console.log(delResult);
   outputField.value = delResult;
 }
 
@@ -178,11 +176,3 @@ document.addEventListener("keydown", (event) => {
     // simple(key);
   }
 });
-
-// document.addEventListener("keydown", (event) => {
-//   const typedValue = event.key;
-//   console.log(typedValue);
-//   outputField.value += typedValue;
-//   result = eval(outputField);
-//   inputField.value = result;
-// });
