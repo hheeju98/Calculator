@@ -155,18 +155,38 @@ export function Remove() {
 
   totalArray.pop();
   deleteArray.pop();
+  console.log(deleteArray);
   outputField.value = deleteArray;
   const delResult = deleteArray.join("");
   outputField.value = delResult;
 }
 
 //reduce
-export function Remove() {
-  const deleteArray = totalArray.reduce(() => {});
+export function Remove1() {
+  const deleteArray = totalArray.reduce((acc, cur) => {
+    console.log(acc);
+    console.log(cur);
+    if (typeof cur === "object") {
+      return acc + cur.value;
+    } else if (typeof cur === "number") {
+      return acc + String(acc);
+    }
+    console.log(acc);
+    console.log(cur);
+    console.log(deleteArray);
+  }, "");
+  console.log(deleteArray);
+  totalArray.pop();
+  // deleteArray.pop();
+  console.log(deleteArray);
+  outputField.value = deleteArray;
+  //const delResult = deleteArray.join("");
+  // outputField.value = delResult;
+  outputField.value = deleteArray;
 }
 
 const del = document.getElementById("del");
-del.addEventListener("click", Remove);
+del.addEventListener("click", Remove1);
 
 //모듈
 const outputField = document.getElementById("outputField");
