@@ -1,4 +1,4 @@
-import totalArray from "./simple.js";
+import { totalArray } from "./simple.js";
 
 export function Remove() {
   const deleteArray = totalArray.map((item) => {

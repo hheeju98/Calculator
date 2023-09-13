@@ -4,16 +4,16 @@ import { Remove } from "./remove.js";
 import { includePriority } from "./priority.js";
 import { calculation } from "../calculation/calculation.js";
 
-let one = "";
-let operatorClicked = true;
-let two = "";
-let result = "";
-let currentOperator = "";
+export let one = "";
+export let operatorClicked = true;
+export let two = "";
+export let result = "";
+export let currentOperator = "";
 // 분산
 
 const totalArray = [];
-export default totalArray;
 const numberArray = [];
+export { totalArray, numberArray };
 const calculateArray = [];
 
 export function simple(e) {
@@ -30,13 +30,13 @@ export function simple(e) {
   } else {
     type = "string";
   }
-  console.log(clickedValue.type);
+
   const totalData = {
     value: clickedValue,
     type: type,
     no: totalArray.length,
   };
-  console.log(totalData);
+
   if (clickedValue !== "del") {
     totalArray.push(totalData);
   }
@@ -140,17 +140,7 @@ export function simple(e) {
 
 //모듈
 const outputField = document.getElementById("outputField");
-document.addEventListener("keypress", simple1);
-// (event) => {
-//   const key = event.key;
-//   if (!isNaN(key) || isOperator(key)) {
-//     outputField.value += key;
-//   }
-//   if (key === "=") {
-//     simple1(key);
-//   simple1(event);
-//   }
-// };
+document.addEventListener("keydown", simple1);
 
 export function simple1(e) {
   const clickedValue = e.key;
@@ -164,13 +154,21 @@ export function simple1(e) {
   } else {
     type = "string";
   }
+  e.preventDefault();
+
   const totalData = {
     value: clickedValue,
     type: type,
     no: totalArray.length,
   };
-  console.log(totalData);
-  if (clickedValue !== "del" && clickedValue !== "c") {
+
+  if (
+    clickedValue !== "del" &&
+    clickedValue !== "c" &&
+    clickedValue !== "Delete" &&
+    clickedValue !== "Shift" &&
+    clickedValue !== "Backspace"
+  ) {
     totalArray.push(totalData);
   }
 
@@ -184,12 +182,8 @@ export function simple1(e) {
     operatorClicked == true
   ) {
     currentOperator = clickedValue;
-    console.log(currentOperator); //
     outputField.value += clickedValue; //왜 두개씩 나오지
-    console.log(totalArray);
     operatorClicked = false;
-    console.log(operatorClicked);
-    console.log(one);
   } else if (
     !isNaN(clickedValue) &&
     currentOperator === "" &&
@@ -203,6 +197,7 @@ export function simple1(e) {
     result = calculation1(one, currentOperator, two);
     two = "";
     one = result;
+    console.log(one);
     operatorClicked = true;
     outputField.value += clickedValue;
 
@@ -217,8 +212,9 @@ export function simple1(e) {
     outputField.value = "";
     operatorClicked = true;
     totalArray.length = 0;
-
     calculateArray.length = 0;
+  } else if (clickedValue === "Delete" || clickedValue === "Backspace") {
+    Remove();
   } else if (
     clickedValue === "=" &&
     !isNaN(totalArray[totalArray.length - 2].value)
@@ -226,13 +222,11 @@ export function simple1(e) {
     inputField.value = result;
     outputField.value = "";
     operatorClicked = true;
-    console.log(totalArray);
+
     if (includePriority(totalArray) !== -1 && numberArray.length > 2) {
-      console.log("ggg");
       const operatorIndex = includePriority(totalArray);
       if (operatorIndex >= 0) {
         const prevNumberIndex = totalArray[operatorIndex].no - 1;
-        console.log(prevNumberIndex);
         const nextNumberIndex = totalArray[operatorIndex].no + 1;
         const prevNumber = totalArray[prevNumberIndex].value;
         const nextNumber = totalArray[nextNumberIndex].value;
