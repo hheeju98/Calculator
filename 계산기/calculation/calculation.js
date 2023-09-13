@@ -23,14 +23,14 @@ export function calculation1(num1, operator, num2) {
       return Number(acc) + Number(cur);
     } else if (operator === "-") {
       return acc - cur;
-    } else if (operator === "×") {
+    } else if (operator === "*") {
       return acc * cur;
-    } else if (operator === "÷") {
+    } else if (operator === "/") {
       return acc / cur;
     }
   });
 }
 
 export function isOperator(value) {
-  return ["+", "-", "×", "÷"].includes(value);
+  return ["+", "-", "×", "÷", "*", "/"].includes(value);
 }
