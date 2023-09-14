@@ -5,11 +5,13 @@ import { includePriority } from "./priority.js";
 import { calculation } from "../calculation/calculation.js";
 import { totalArray, numberArray, calculateArray } from "./simple.js";
 
-export let one = "";
-export let operatorClicked = true;
-export let two = "";
-export let result = "";
-export let currentOperator = "";
+let one = "";
+let operatorClicked = true;
+let two = "";
+let result = "";
+let currentOperator = "";
+
+document.addEventListener("keydown", simple1);
 
 export function simple1(e) {
   let clickedValue1 = e.key;
@@ -66,7 +68,6 @@ export function simple1(e) {
     result = calculation1(one, currentOperator, two);
     two = "";
     one = result;
-    console.log(one);
     operatorClicked = true;
     outputField.value += clickedValue1;
 

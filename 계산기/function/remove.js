@@ -29,11 +29,12 @@ export function Remove1() {
     }
   }, "");
   totalArray.pop();
+  console.log(typeof deleteArray);
+  const newDeleteArray = deleteArray.slice(0, -1);
   // deleteArray.pop();
-  outputField.value = deleteArray;
+  outputField.value = newDeleteArray;
   //const delResult = deleteArray.join("");
   // outputField.value = delResult;
-  outputField.value = deleteArray;
 }
 
 const del = document.getElementById("del");

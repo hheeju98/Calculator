@@ -14,12 +14,10 @@ export let currentOperator = "";
 
 const totalArray = [];
 const numberArray = [];
-export { totalArray, numberArray, calculateArray };
 const calculateArray = [];
+export { totalArray, numberArray, calculateArray };
 
 export function simple(e) {
-  console.log("string", e);
-
   const clickedValue = e.target.innerText;
   const inputField = document.querySelector(".inputField");
   const outputField = document.querySelector(".outputField");
@@ -38,6 +36,7 @@ export function simple(e) {
     no: totalArray.length,
   };
 
+  console.log(totalData);
   if (clickedValue !== "del") {
     totalArray.push(totalData);
   }
@@ -131,14 +130,10 @@ export function simple(e) {
         );
 
         inputField.value = finalResult;
-        // totalArray.length = 0;
-        // numberArray.length = 0;
-        // calculateArray.length = 0;
+        totalArray.length = 0;
+        numberArray.length = 0;
+        calculateArray.length = 0;
       }
     }
   }
 }
-
-//모듈
-const outputField = document.getElementById("outputField");
-document.addEventListener("keydown", simple1);
