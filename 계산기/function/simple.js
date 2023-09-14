@@ -63,15 +63,6 @@ export function simple(e) {
     operatorClicked = true;
   } else if (!isNaN(clickedValue) && currentOperator !== "" && one !== "") {
     two += clickedValue;
-    result = calculation(one, currentOperator, two);
-    two = "";
-    one = result;
-    operatorClicked = true;
-    outputField.value += clickedValue;
-
-    if (inputField.value !== "" && isOperator(clickedValue)) {
-      outputField.value += clickedValue;
-    }
   } else if (clickedValue === "c") {
     currentOperator = "";
     one = "";
@@ -86,6 +77,16 @@ export function simple(e) {
     clickedValue === "=" &&
     !isNaN(totalArray[totalArray.length - 2].value)
   ) {
+    result = calculation(one, currentOperator, two);
+    two = "";
+    one = result;
+    operatorClicked = true;
+    outputField.value += clickedValue;
+
+    if (inputField.value !== "" && isOperator(clickedValue)) {
+      outputField.value += clickedValue;
+    }
+    console.log(one);
     inputField.value = result;
     outputField.value = "";
     operatorClicked = true;
@@ -137,3 +138,8 @@ export function simple(e) {
     }
   }
 }
+
+// key 이벤트 제대로 나오도록
+// 18일까지
+// simple함수 모듈화 해서 키이벤트 함수에서 가져와서 쓰도록
+// =을 눌렀을때만 동작하도록 해서 delete제대로 작동하도록

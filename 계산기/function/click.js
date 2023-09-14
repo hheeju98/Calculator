@@ -3,78 +3,51 @@ import { calculation1 } from "../calculation/calculation.js";
 import { Remove } from "./remove.js";
 import { includePriority } from "./priority.js";
 import { calculation } from "../calculation/calculation.js";
+import { simple1 } from "./keyEvent.js";
 import { totalArray, numberArray, calculateArray } from "./simple.js";
+import { totalData } from "./simple.js";
 
-let one = "";
-let operatorClicked = true;
-let two = "";
-let result = "";
-let currentOperator = "";
+export let one = "";
+export let operatorClicked = true;
+export let two = "";
+export let result = "";
+export let currentOperator = "";
+const inputField = document.querySelector(".inputField");
+const outputField = document.querySelector(".outputField");
 
-document.addEventListener("keydown", simple1);
-
-export function simple1(e) {
-  let clickedValue1 = e.key;
-  const inputField = document.querySelector(".inputField");
-  const outputField = document.querySelector(".outputField");
-
-  let type;
-
-  if (!isNaN(clickedValue1)) {
-    type = "number";
-  } else {
-    type = "string";
-  }
-  e.preventDefault();
-
-  const totalData = {
-    value: clickedValue1,
-    type: type,
-    no: totalArray.length,
-  };
-
-  if (
-    clickedValue1 !== "del" &&
-    clickedValue1 !== "c" &&
-    clickedValue1 !== "Delete" &&
-    clickedValue1 !== "Shift" &&
-    clickedValue1 !== "Backspace"
-  ) {
+export function click(click) {
+  if (click !== "del") {
     totalArray.push(totalData);
   }
 
-  if (!isNaN(clickedValue1)) {
+  if (!isNaN(click)) {
     numberArray.push(totalData);
   }
 
-  if (
-    isOperator(clickedValue1) == true &&
-    one !== "" &&
-    operatorClicked == true
-  ) {
-    currentOperator = clickedValue1;
-    outputField.value += clickedValue1;
+  if (isOperator(click) == true && one !== "" && operatorClicked == true) {
+    currentOperator = click;
+    outputField.value += click;
     operatorClicked = false;
   } else if (
-    !isNaN(clickedValue1) &&
+    !isNaN(click) &&
     currentOperator === "" &&
     inputField.value == ""
   ) {
-    one += clickedValue1;
-    outputField.value += clickedValue1;
+    one += click;
+    outputField.value += click;
     operatorClicked = true;
-  } else if (!isNaN(clickedValue1) && currentOperator !== "" && one !== "") {
-    two += clickedValue1;
-    result = calculation1(one, currentOperator, two);
+  } else if (!isNaN(click) && currentOperator !== "" && one !== "") {
+    two += click;
+    result = calculation(one, currentOperator, two);
     two = "";
     one = result;
     operatorClicked = true;
-    outputField.value += clickedValue1;
+    outputField.value += click;
 
-    if (inputField.value !== "" && isOperator(clickedValue1)) {
-      outputField.value += clickedValue1;
+    if (inputField.value !== "" && isOperator(click)) {
+      outputField.value += click;
     }
-  } else if (clickedValue1 === "c") {
+  } else if (click === "c") {
     currentOperator = "";
     one = "";
     two = "";
@@ -83,18 +56,14 @@ export function simple1(e) {
     operatorClicked = true;
     totalArray.length = 0;
     calculateArray.length = 0;
-  } else if (clickedValue1 === "Delete" || clickedValue1 === "Backspace") {
-    Remove();
-  } else if (
-    clickedValue1 === "=" &&
-    !isNaN(totalArray[totalArray.length - 2].value)
-  ) {
+  } else if (click === "=" && !isNaN(totalArray[totalArray.length - 2].value)) {
     inputField.value = result;
     outputField.value = "";
     operatorClicked = true;
 
     if (includePriority(totalArray) !== -1 && numberArray.length > 2) {
       const operatorIndex = includePriority(totalArray);
+
       if (operatorIndex >= 0) {
         const prevNumberIndex = totalArray[operatorIndex].no - 1;
         const nextNumberIndex = totalArray[operatorIndex].no + 1;
@@ -106,7 +75,7 @@ export function simple1(e) {
           nextNumber
         );
 
-        const result = calculation1(
+        const result = calculation(
           prevNumber,
           totalArray[operatorIndex].value,
           nextNumber
@@ -126,7 +95,7 @@ export function simple1(e) {
           }
         });
 
-        const finalResult = calculation1(
+        const finalResult = calculation(
           finalArray[0],
           finalArray[1],
           finalArray[2]
