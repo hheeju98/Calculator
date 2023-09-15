@@ -41,10 +41,14 @@ export function click(click) {
     currentOperator === "" &&
     inputField.value == ""
   ) {
+    // 제일 첫번째 값이 숫자일때 one이다
     one += click;
     outputField.value += click;
     operatorClicked = true;
+    // 3+4*5+3
   } else if (!isNaN(click) && currentOperator !== "" && one !== "") {
+    // 두번째 숫자가 있을 경우 그 값은 two
+    // 결과 계산 -> 결과를 one에 넣기
     two += click;
     result = calculation(one, currentOperator, two);
     two = "";
