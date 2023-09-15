@@ -1,25 +1,31 @@
-import { isOperator } from "../calculation/calculation.js";
-import { calculation1 } from "../calculation/calculation.js";
-import { Remove } from "./remove.js";
-import { includePriority } from "./priority.js";
+import {
+  totalArray,
+  totalData,
+  numberArray,
+  calculateArray,
+} from "./simple.js";
 import { calculation } from "../calculation/calculation.js";
-import { simple1 } from "./keyEvent.js";
-import { totalArray, numberArray, calculateArray } from "./simple.js";
-import { totalData } from "./simple.js";
-
+import { isOperator } from "../calculation/calculation.js";
+import { includePriority } from "./priority.js";
 export let one = "";
 export let operatorClicked = true;
 export let two = "";
 export let result = "";
 export let currentOperator = "";
-const inputField = document.querySelector(".inputField");
-const outputField = document.querySelector(".outputField");
 
 export function click(click) {
-  if (click !== "del") {
+  const inputField = document.querySelector(".inputField");
+  const outputField = document.querySelector(".outputField");
+
+  if (
+    click !== "del" &&
+    click !== "c" &&
+    click !== "Delete" &&
+    click !== "Shift" &&
+    click !== "Backspace"
+  ) {
     totalArray.push(totalData);
   }
-
   if (!isNaN(click)) {
     numberArray.push(totalData);
   }
@@ -63,7 +69,6 @@ export function click(click) {
 
     if (includePriority(totalArray) !== -1 && numberArray.length > 2) {
       const operatorIndex = includePriority(totalArray);
-
       if (operatorIndex >= 0) {
         const prevNumberIndex = totalArray[operatorIndex].no - 1;
         const nextNumberIndex = totalArray[operatorIndex].no + 1;
