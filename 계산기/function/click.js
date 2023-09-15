@@ -7,6 +7,8 @@ import {
 import { calculation } from "../calculation/calculation.js";
 import { isOperator } from "../calculation/calculation.js";
 import { includePriority } from "./priority.js";
+import { simple1 } from "./keyEvent.js";
+
 export let one = "";
 export let operatorClicked = true;
 export let two = "";
