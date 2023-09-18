@@ -8,17 +8,16 @@ import { calculation } from "../calculation/calculation.js";
 import { isOperator } from "../calculation/calculation.js";
 import { includePriority } from "./priority.js";
 import { simple1 } from "./keyEvent.js";
-
+import { Remove } from "./remove.js";
 export let one = "";
 export let operatorClicked = true;
 export let two = "";
 export let result = "";
 export let currentOperator = "";
+const inputField = document.querySelector(".inputField");
+const outputField = document.querySelector(".outputField");
 
 export function click(click) {
-  const inputField = document.querySelector(".inputField");
-  const outputField = document.querySelector(".outputField");
-
   if (
     click !== "del" &&
     click !== "c" &&
@@ -27,6 +26,7 @@ export function click(click) {
     click !== "Backspace"
   ) {
     totalArray.push(totalData);
+    console.log(totalArray);
   }
   if (!isNaN(click)) {
     numberArray.push(totalData);
@@ -42,41 +42,17 @@ export function click(click) {
     totalArray.length = 0;
     calculateArray.length = 0;
   } else if (click === "=") {
-    console.log(totalArray[0]);
-    if (
-      !isNaN(
-        totalArray[0].value && currentOperator === "" && inputField.value == ""
-      )
-    ) {
-      one = totalArray[0].value;
-      console.log(one);
-      console.log(totalArray[1].value);
-      console.log(totalArray[1].type);
-    }
-
-    currentOperator = totalArray[1].value;
-    console.log(currentOperator);
-    //   outputField.value += totalArray.values;
-    operatorClicked = false;
-
-    if (!isNaN(totalArray[2].value) && currentOperator !== "" && one !== "") {
-      two = totalArray[2].value;
-      console.log(two);
-      result = calculation(one, currentOperator, two);
-      console.log(result);
-      two = "";
-      one = result;
-      operatorClicked = true;
-      //      outputField.value = totalArray.value;
-
-      if (inputField.value !== "" && isOperator(click)) {
-        outputField.value += click;
+    const calculateArray = totalArray.map((item) => {
+      if (typeof item === "object") {
+        return item.value;
+      } else if (typeof item === "number") {
+        return item;
       }
-    }
+    });
 
-    inputField.value = result;
-    outputField.value = "";
-    operatorClicked = true;
+    allocate(calculateArray);
+    console.log(calculateArray[0]);
+    console.log(calculateArray);
 
     if (includePriority(totalArray) !== -1 && numberArray.length > 2) {
       const operatorIndex = includePriority(totalArray);
@@ -150,3 +126,50 @@ export function click(click) {
 //     outputField.value += click;
 //   }
 // }
+
+function allocate(arr) {
+  if (
+    !isNaN(arr[0])
+    // currentOperator === "" &&
+    // inputField.value == ""
+  ) {
+    one = arr[0];
+    console.log(one);
+    currentOperator = arr[1];
+    // console.log(currentOperator);
+    outputField.value += arr;
+    operatorClicked = false;
+
+    // if (!isNaN(totalArray[2].value) && currentOperator !== "" && one !== "") {
+    two = arr[2];
+    console.log(two);
+    result = calculation(one, currentOperator, two);
+    arr.splice(0, 3, result);
+    console.log(arr);
+    console.log(arr[2]);
+    console.log(result);
+    one = result;
+    console.log(one);
+    two = "";
+    two = arr[2];
+
+    currentOperator = arr[1];
+    result = calculation(one, currentOperator, two);
+    console.log(result);
+    console.log(currentOperator);
+    console.log(typeof one);
+    console.log(totalArray);
+    console.log(result);
+    operatorClicked = true;
+    outputField.value = arr;
+
+    if (inputField.value !== "" && isOperator(click)) {
+      outputField.value += click;
+    }
+  }
+
+  inputField.value = result;
+  outputField.value = "";
+  operatorClicked = true;
+  console.log(typeof result);
+}

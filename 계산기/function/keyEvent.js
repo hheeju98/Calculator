@@ -5,6 +5,11 @@ import { totalData } from "./simple.js";
 document.addEventListener("keydown", simple1);
 export function simple1(e) {
   let clickedValue1 = e.key;
+  if (/^[가-힣]+$/.test(clickedValue1)) {
+    e.preventDefault();
+    return;
+  }
+
   click(clickedValue1);
   console.log(e);
   let type;

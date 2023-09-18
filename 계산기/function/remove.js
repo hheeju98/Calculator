@@ -1,6 +1,10 @@
 import { totalArray } from "./simple.js";
 
+const del = document.getElementById("del");
+del.addEventListener("click", Remove);
+
 export function Remove() {
+  console.log("fgfg");
   const deleteArray = totalArray.map((item) => {
     if (typeof item === "object") {
       return item.value;
@@ -8,7 +12,8 @@ export function Remove() {
       return String(item);
     }
   });
-
+  console.log("gjgj");
+  console.log(deleteArray);
   totalArray.pop();
   deleteArray.pop();
   console.log(deleteArray);
@@ -31,6 +36,3 @@ export function Remove1() {
 
   outputField.value = newDeleteArray;
 }
-
-const del = document.getElementById("del");
-del.addEventListener("click", Remove1);
