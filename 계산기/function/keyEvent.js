@@ -3,9 +3,14 @@ import { totalArray } from "./simple.js";
 import { totalData } from "./simple.js";
 
 document.addEventListener("keydown", simple1);
+
 export function simple1(e) {
   let clickedValue1 = e.key;
+
   if (/^[가-힣]+$/.test(clickedValue1)) {
+    e.preventDefault();
+    return;
+  } else if (/^[a-zA-Z]+$/.test(clickedValue1)) {
     e.preventDefault();
     return;
   }

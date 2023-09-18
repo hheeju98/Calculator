@@ -1,6 +1,10 @@
 export function includePriority(arr) {
   const index = arr.findIndex(
-    (item) => item === "×" || item === "÷" || item === "*" || item === "/"
+    (item) =>
+      item.value === "×" ||
+      item.value === "÷" ||
+      item.value === "*" ||
+      item.value === "/"
   );
   return index;
 }
