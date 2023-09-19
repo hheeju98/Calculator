@@ -14,7 +14,7 @@ export function simple1(e) {
 
     return;
 
-    //말고딴거 하나 어떤경우사용!
+    // e.preventDefault 말고딴거 하나 어떤경우사용!
   }
 
   let type;

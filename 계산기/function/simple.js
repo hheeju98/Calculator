@@ -8,10 +8,13 @@ export let totalData = {
   type: "",
   no: "",
 };
-export function simple(e, arr) {
-  console.log(arr); //이름나오게(arr)
-  const clickedValue = e.target.innerText;
 
+export function simple(e, name) {
+  // arr = "허희주";
+  // console.log(e);
+  //console.log(arr); //이름나오게(arr)
+  const clickedValue = e.target.innerText;
+  console.log(name);
   let type;
 
   if (!isNaN(clickedValue)) {

@@ -9,22 +9,18 @@ export let one = "";
 export let operatorClicked = true;
 export let two = "";
 export let result = "";
-export let currentOperator = ""; //
+export let currentOperator = ""; // let 안쓰는게 좋다
 
 const inputField = document.querySelector(".inputField");
 const outputField = document.querySelector(".outputField"); //
 
 export function click(click, Data) {
-  if (
-    click !== "del" && // 배열에 include true false로
-    click !== "c" &&
-    click !== "Delete" &&
-    click !== "Shift" &&
-    click !== "Backspace"
-  ) {
+  const arrInclude = ["del", "c", "Delete", "Shift", "Backspace"];
+  if (arrInclude.includes(click) == false) {
     totalArray.push(Data);
     outputField.value += Data.value;
   }
+
   if (!isNaN(click)) {
     numberArray.push(Data);
   } else if (click === "c") {
