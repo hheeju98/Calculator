@@ -12,6 +12,8 @@ export function calculation(num1, operator, num2) {
     return num1 * num2;
   } else if (operator === "÷") {
     return num1 / num2;
+  } else if (operator === "*") {
+    return num1 * num2;
   }
 } //바벨처리
 

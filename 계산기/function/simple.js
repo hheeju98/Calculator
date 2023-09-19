@@ -24,6 +24,5 @@ export function simple(e) {
     type: type,
     no: totalArray.length,
   };
-  click(clickedValue);
-  console.log(totalData);
+  click(clickedValue, totalData);
 }

@@ -1,9 +1,4 @@
-import {
-  totalArray,
-  totalData,
-  numberArray,
-  calculateArray,
-} from "./simple.js";
+import { totalArray, numberArray, calculateArray } from "./simple.js";
 import { calculation } from "../calculation/calculation.js";
 import { isOperator } from "../calculation/calculation.js";
 import { includePriority } from "./priority.js";
@@ -19,7 +14,7 @@ export let currentOperator = "";
 const inputField = document.querySelector(".inputField");
 const outputField = document.querySelector(".outputField");
 
-export function click(click) {
+export function click(click, Data) {
   if (
     click !== "del" &&
     click !== "c" &&
@@ -27,11 +22,11 @@ export function click(click) {
     click !== "Shift" &&
     click !== "Backspace"
   ) {
-    totalArray.push(totalData);
-    outputField.value += totalData.value;
+    totalArray.push(Data);
+    outputField.value += Data.value;
   }
   if (!isNaN(click)) {
-    numberArray.push(totalData);
+    numberArray.push(Data);
   } else if (click === "c") {
     currentOperator = "";
     one = "";
@@ -112,32 +107,22 @@ function allocate(arr) {
     operatorClicked = false;
     // if (!isNaN(totalArray[2].value) && currentOperator !== "" && one !== "") {
     two = arr[2];
-    console.log(two);
     let result = calculation(one, currentOperator, two);
     arr.splice(0, 3, result);
 
     one = result;
-    console.log(one);
     two = "";
 
     if (arr.length >= 4) {
       allocate(arr);
     }
-    // two = arr[2];
-
     inputField.value = one;
     currentOperator = arr[1];
-    // result = calculation(one, currentOperator, two);
-    // operatorClicked = true;
-    // outputField.value = arr;
-    // inputField.value = result;
     if (inputField.value !== "" && isOperator(click)) {
       outputField.value += click;
     }
   }
 
-  console.log(result);
   outputField.value = "";
   operatorClicked = true;
-  console.log(typeof result);
 }

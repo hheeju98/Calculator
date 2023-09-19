@@ -11,7 +11,6 @@ export function Remove() {
 
   totalArray.pop();
   deleteArray.pop();
-  console.log(deleteArray);
   outputField.value = deleteArray;
   const delResult = deleteArray.join("");
   outputField.value = delResult;
@@ -34,3 +33,9 @@ export function Remove1() {
 
 const del = document.getElementById("del");
 del.addEventListener("click", Remove);
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Backspace" || e.key === "Delete") {
+    Remove();
+  }
+});

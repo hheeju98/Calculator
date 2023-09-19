@@ -1,12 +1,12 @@
 import { click } from "./click.js";
-import { totalArray } from "./simple.js";
+import { totalArray, calculateArray, numberArray } from "./simple.js";
 import { totalData } from "./simple.js";
 
 document.addEventListener("keydown", simple1);
 
 export function simple1(e) {
   let clickedValue1 = e.key;
-
+  console.log(e.key);
   if (/^[가-힣]+$/.test(clickedValue1)) {
     e.preventDefault();
     return;
@@ -14,9 +14,6 @@ export function simple1(e) {
     e.preventDefault();
     return;
   }
-
-  click(clickedValue1);
-  console.log(e);
   let type;
 
   if (!isNaN(clickedValue1)) {
@@ -24,13 +21,19 @@ export function simple1(e) {
   } else {
     type = "string";
   }
-  e.preventDefault();
-  console.log(clickedValue1);
 
-  totalData = {
+  let totalData1 = {
     value: clickedValue1,
     type: type,
     no: totalArray.length,
   };
-  console.log(totalData);
+  e.preventDefault();
+
+  totalData1 = {
+    value: clickedValue1,
+    type: type,
+    no: totalArray.length,
+  };
+  click(clickedValue1, totalData1);
+  e.preventDefault();
 }
