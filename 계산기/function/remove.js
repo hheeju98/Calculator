@@ -31,11 +31,11 @@ export function Remove1() {
   outputField.value = newDeleteArray;
 }
 
-const del = document.getElementById("del");
+const del = document.getElementById("del"); //전역 통일getElement
 del.addEventListener("click", Remove);
 
 document.addEventListener("keydown", function (e) {
   if (e.key === "Backspace" || e.key === "Delete") {
     Remove();
-  }
+  } //index
 });

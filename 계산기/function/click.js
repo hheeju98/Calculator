@@ -3,20 +3,20 @@ import { calculation } from "../calculation/calculation.js";
 import { isOperator } from "../calculation/calculation.js";
 import { includePriority } from "./priority.js";
 import { simple1 } from "./keyEvent.js";
-import { Remove } from "./remove.js";
+import { Remove } from "./remove.js"; //수정
 
 export let one = "";
 export let operatorClicked = true;
 export let two = "";
 export let result = "";
-export let currentOperator = "";
+export let currentOperator = ""; //
 
 const inputField = document.querySelector(".inputField");
-const outputField = document.querySelector(".outputField");
+const outputField = document.querySelector(".outputField"); //
 
 export function click(click, Data) {
   if (
-    click !== "del" &&
+    click !== "del" && // 배열에 include true false로
     click !== "c" &&
     click !== "Delete" &&
     click !== "Shift" &&
@@ -126,3 +126,6 @@ function allocate(arr) {
   outputField.value = "";
   operatorClicked = true;
 }
+// 이벤트 리스너
+// 앵귤러 공부1 (aggrid공부)
+// aggrid공부

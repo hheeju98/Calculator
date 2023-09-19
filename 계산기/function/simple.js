@@ -8,7 +8,8 @@ export let totalData = {
   type: "",
   no: "",
 };
-export function simple(e) {
+export function simple(e, arr) {
+  console.log(arr); //이름나오게(arr)
   const clickedValue = e.target.innerText;
 
   let type;

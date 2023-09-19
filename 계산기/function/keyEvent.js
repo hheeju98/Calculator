@@ -3,17 +3,20 @@ import { totalArray, calculateArray, numberArray } from "./simple.js";
 import { totalData } from "./simple.js";
 
 document.addEventListener("keydown", simple1);
-
+//콜백함수공부
+// 엔터
 export function simple1(e) {
+  e.preventDefault();
   let clickedValue1 = e.key;
   console.log(e.key);
-  if (/^[가-힣]+$/.test(clickedValue1)) {
-    e.preventDefault();
+  if (/^[가-힣]+$/.test(clickedValue1) || /^[a-zA-Z]+$/.test(clickedValue1)) {
+    //한글영어 정규표현식
+
     return;
-  } else if (/^[a-zA-Z]+$/.test(clickedValue1)) {
-    e.preventDefault();
-    return;
+
+    //말고딴거 하나 어떤경우사용!
   }
+
   let type;
 
   if (!isNaN(clickedValue1)) {
@@ -27,7 +30,6 @@ export function simple1(e) {
     type: type,
     no: totalArray.length,
   };
-  e.preventDefault();
 
   totalData1 = {
     value: clickedValue1,
@@ -35,5 +37,5 @@ export function simple1(e) {
     no: totalArray.length,
   };
   click(clickedValue1, totalData1);
-  e.preventDefault();
 }
+//axios
