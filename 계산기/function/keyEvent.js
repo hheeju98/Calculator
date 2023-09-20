@@ -7,6 +7,7 @@ document.addEventListener("keydown", simple1);
 // 엔터
 export function simple1(e) {
   e.preventDefault();
+
   let clickedValue1 = e.key;
   console.log(e.key);
   if (/^[가-힣]+$/.test(clickedValue1) || /^[a-zA-Z]+$/.test(clickedValue1)) {
