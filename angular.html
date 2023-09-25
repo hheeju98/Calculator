@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>AngularJS ngModel 및 Scope 예제</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body>
+    <div ng-controller="myCtrl">
+      <h2>이름: {{ name }}</h2>
+      <input type="text" ng-model="name" placeholder="이름을 입력하세요" />
+    </div>
+
+    <script>
+      var app = angular.module("myApp", []);
+
+      app.controller("myCtrl", function ($scope) {
+        $scope.name = "John Doe";
+      });
+    </script>
+  </body>
+</html>

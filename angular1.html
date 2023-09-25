@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>AngularJS 특정 클래스 클릭 시 인풋 값 설정 예제</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body>
+    <div ng-controller="myCtrl">
+      <button ng-click="setValue('Hello')">Hello 클래스 클릭</button>
+      <button ng-click="setValue('World')">World 클래스 클릭</button>
+      <input
+        type="text"
+        ng-model="inputValue"
+        placeholder="값이 여기에 들어갑니다"
+      />
+    </div>
+
+    <script>
+      var app = angular.module("myApp", []);
+
+      app.controller("myCtrl", function ($scope) {
+        $scope.inputValue = "";
+
+        $scope.setValue = function (value) {
+          $scope.inputValue = value;
+        };
+      });
+    </script>
+  </body>
+</html>

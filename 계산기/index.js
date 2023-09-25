@@ -6,6 +6,6 @@ window.onload = () => {
   tdElementsArray.map((e) => {
     const name = "허희주";
 
-    e.addEventListener("click", (e) => simple(e, name)); //
+    e.addEventListener("click", simple(name)); //
   });
 };

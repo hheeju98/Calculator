@@ -10,9 +10,6 @@ export let totalData = {
 };
 
 export function simple(e, name) {
-  // arr = "허희주";
-  // console.log(e);
-  //console.log(arr); //이름나오게(arr)
   const clickedValue = e.target.innerText;
   console.log(name);
   let type;
